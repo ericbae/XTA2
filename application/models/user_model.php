@@ -10,6 +10,7 @@ class user_model extends CI_Model
 		$this->db->join("user_profiles AS up", "u.id=up.user_id");
 		$this->db->where($data);
 		$query = $this->db->get();
+		return $query->result();
 	}
 
 	// Returns user by its email
