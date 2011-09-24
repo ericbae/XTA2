@@ -20,6 +20,11 @@ class user_model extends CI_Model
 		return $query->result();
 	}
 	
+	function get_user_by_username($username)
+	{
+		$query = $this->db->query("SELECT * FROM users u, user_profiles up WHERE u.username='$username' and u.id = up.user_id");
+		return $query->result();
+	}
 	// a generic update method for user profile
 	function update_user_profile($user_id, $data)
 	{
