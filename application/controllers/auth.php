@@ -476,6 +476,7 @@ class Auth extends CI_Controller
 	function _send_email($type, $email, &$data)
 	{
 		$this->load->library('email');
+		$this->email->set_newline("\r\n");
 		$this->email->from($this->config->item('webmaster_email', 'tank_auth'), $this->config->item('website_name', 'tank_auth'));
 		$this->email->reply_to($this->config->item('webmaster_email', 'tank_auth'), $this->config->item('website_name', 'tank_auth'));
 		$this->email->to($email);
