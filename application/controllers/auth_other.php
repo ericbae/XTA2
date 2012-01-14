@@ -272,7 +272,7 @@ class auth_other extends CI_Controller
 		// load validation library and rules
 		$this->load->config('tank_auth', TRUE);
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']');
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|callback_username_check');
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|callback_email_check');
 		
 		// Run the validation
@@ -346,7 +346,16 @@ class auth_other extends CI_Controller
 		}
 		else { return true; }
 	}
-	
+	function username_check($username)
+	{
+		$user = $this->user_model->get_user_by_username($username);
+		if ( sizeof($user) > 0) 
+		{
+			$this->form_validation->set_message('username_check', 'This %s is already registered.');
+			return false;
+		}
+		else { return true; }
+	}
 	// generates a random password for the user
 	function generate_password($length=9, $strength=0) 
 	{
