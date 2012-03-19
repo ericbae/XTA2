@@ -338,7 +338,7 @@ class auth_other extends CI_Controller
 	// function to validate the email input field
 	function email_check($email)
 	{
-		$user = $this->user_model->get_user_by_email($email);
+		$user = $this->users->get_user_by_email($email);
 		if ( sizeof($user) > 0) 
 		{
 			$this->form_validation->set_message('email_check', 'This %s is already registered.');
@@ -348,7 +348,7 @@ class auth_other extends CI_Controller
 	}
 	function username_check($username)
 	{
-		$user = $this->user_model->get_user_by_username($username);
+		$user = $this->users->get_user_by_username($username);
 		if ( sizeof($user) > 0) 
 		{
 			$this->form_validation->set_message('username_check', 'This %s is already registered.');
