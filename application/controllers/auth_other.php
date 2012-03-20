@@ -292,7 +292,7 @@ class auth_other extends CI_Controller
 			$password = $this->generate_password(9, 8);
 			$this->tank_auth->create_user($username, $email, $password, false);
 			$new_user = $this->user_model->get_user_by_email($email);
-			$user_id = $new_user[0]->id;
+			$user_id = $new_user[0]->user_id;
 			if( $this->session->userdata('facebook_id')) 
 			{ 
 				$this->user_model->update_user_profile($user_id, array('facebook_id' => $this->session->userdata('facebook_id')));
