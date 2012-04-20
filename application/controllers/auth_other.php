@@ -290,9 +290,8 @@ class auth_other extends CI_Controller
 			 * to insert this user and also into user profile table with tank auth id
 			 */
 			$password = $this->generate_password(9, 8);
-			$this->tank_auth->create_user($username, $email, $password, false);
-			$new_user = $this->user_model->get_user_by_email($email);
-			$user_id = $new_user[0]->id;
+			$data = $this->tank_auth->create_user($username, $email, $password, false);
+			$user_id = $data['user_id'];
 			if( $this->session->userdata('facebook_id')) 
 			{ 
 				$this->user_model->update_user_profile($user_id, array('facebook_id' => $this->session->userdata('facebook_id')));
@@ -338,7 +337,7 @@ class auth_other extends CI_Controller
 	// function to validate the email input field
 	function email_check($email)
 	{
-		$user = $this->user_model->get_user_by_email($email);
+		$user = $this->users->get_user_by_email($email);
 		if ( sizeof($user) > 0) 
 		{
 			$this->form_validation->set_message('email_check', 'This %s is already registered.');
@@ -348,7 +347,7 @@ class auth_other extends CI_Controller
 	}
 	function username_check($username)
 	{
-		$user = $this->user_model->get_user_by_username($username);
+		$user = $this->users->get_user_by_username($username);
 		if ( sizeof($user) > 0) 
 		{
 			$this->form_validation->set_message('username_check', 'This %s is already registered.');
