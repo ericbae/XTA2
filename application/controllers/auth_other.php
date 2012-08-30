@@ -48,6 +48,14 @@ class auth_other extends CI_Controller
 	// function to allow users to log in via twitter
 	function twitter_signin()
 	{
+		
+		if ($this->input->get('denied')) {
+			
+			echo 'User denied twitter authorization';
+			// Possibly redirect to home page or show generic deneied message
+			
+		}else{
+		
 		// It really is best to auto-load this library!
 		//$this->load->library('tweet'); // automatically loaded in the autoload!
 		
@@ -98,7 +106,9 @@ class auth_other extends CI_Controller
 				//$this->tank_auth->clear_login_attempts($user[0]->email); can't run this when doing twitter
 				redirect('auth', 'refresh');	
 			}			
-		}		
+		}
+		
+		}
 	}
 	
 	// handle when users log in using google friend connect
