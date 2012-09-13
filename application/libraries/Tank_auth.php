@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once('phpass-0.1/PasswordHash.php');
+require_once('phpass-0.3/PasswordHash.php');
 
 define('STATUS_ACTIVATED', '1');
 define('STATUS_NOT_ACTIVATED', '0');
