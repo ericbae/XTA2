@@ -292,8 +292,8 @@ class auth_other extends CI_Controller
 		}
 		else
 		{
-			$username = mysql_real_escape_string($this->input->post('username'));
-			$email = mysql_real_escape_string($this->input->post('email'));
+			$username   =   $this->db->escape_str($this->input->post('username'));
+			$email      =   $this->db->escape_str($this->input->post('email'));
 			
 			/*
 			 * We now must create a new user in tank auth with a random password in order
